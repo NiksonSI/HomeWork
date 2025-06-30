@@ -4,7 +4,7 @@ func addAge (age: Int) {
     
     if age >= 18 {
         print("Вы совершеннолетний")
-    } else if age < 18 {
+    } else {
         print("Вы несовершеннолетний")
     }
 }
@@ -19,7 +19,7 @@ func addNumbers1 (number: Int) {
 
         if (number % 2 != 0) {
             print("Нечётное число")
-        } else if (number % 2 == 0) {
+        } else {
             print("Чётное число")
         }
 }
@@ -35,7 +35,7 @@ func addNumbers2 (number: Int) {
         print("Положительно число")
     } else if (number < 0 ){
         print("Отрицательное число")
-    } else if (number == 0){
+    } else {
         print("Число равно нулю")
     }
 }
@@ -85,7 +85,7 @@ grade(points: 46)
 grade(points: 98)
 grade(points: 89)
 
-// Задача №2.1 Каоькулятор
+// Задача №2.1 Калькулятор
 
 func calculate(number1: Double, number2: Double, action: Character) -> String {
     
@@ -120,15 +120,29 @@ func passwordCheck(password: String) -> String {
     
     var result2 = ""
     
-    if password.count <= passwordCount && numbers.contains(9) && letters.contains != nil {
+    let isNumber = password.contains
+    { $0.isNumber }
+    let isLetter = password.contains
+    { $0.isLetter }
+    
+    if password.count <= passwordCount && password.contains(isLetter) && password.contains(isNumber){
         print("Надёжный пароль")
         result2 = "Надёжный пароль"
-    } else {
-        print("Слабый пароль")
-        result2 = "Слабый пароль"
     }
+        
     return result2
-    }
+}
+//    var result2 = ""
+//    
+//    if password.count <= passwordCount && numbers.contains(9) && letters.contains != nil {
+//        print("Надёжный пароль")
+//        result2 = "Надёжный пароль"
+//    } else {
+//        print("Слабый пароль")
+//        result2 = "Слабый пароль"
+//    }
+//    return result2
+//    }
 passwordCheck(password: "Fdsad22112aasfs")
 passwordCheck(password: "Sdde32194")
 passwordCheck(password: "asd2")

@@ -50,9 +50,15 @@ for evenNumber2 in 1...50 {
 
 // Задача №2.1 Таблица умножения (Вопрос к форммулировке задания)
 
-for index in 1...10 {
-    print("1 X \(index) = \(1 * index)")
+for firstIndex in 1...10 {
+    for secondIndex in 1...10 {
+        print("\(firstIndex) X \(secondIndex) = \(firstIndex * secondIndex)")
+    }
 }
+
+//for index in 1...10 {
+//    print("1 X \(index) = \(1 * index)")
+//}
 
 // Задача №2.2 Поиск делителей числа
 
@@ -79,12 +85,23 @@ findDivisors(numberN: 40)
 //        print("Простое число: \(index)")
 //    }
 //}
-for i  in 2...100 {
-    if i % 1 == 0 && i % i == 0 {
-        print("Простое число:   \(i)")
-    }
-}
 
+func primeNumber(number: Int) -> Bool {
+    guard number >= 2 else {return false}
+    
+    for i in 2 ..< number {
+        if number % i == 0 {
+            return false
+        }
+    }
+    return true
+}
+//for i  in 2...100 {
+//    if i % 1 == 0 && i % i == 0 {
+//        print("Простое число:   \(i)")
+//    }
+//}
+primeNumber(number: 11)
 // Задача №2.4 Обратный счет
 
 func reverseCount(numberN: Int) {
