@@ -89,8 +89,13 @@ func fibonacciSequence(count: Int) -> [Int] {
     
     var a = 0
     var b = 1
+    fiboCount.append(a)
+    fiboCount.append(b)
     
     for number in 0..<count {
+        var x = 0
+        var y = 0
+        
         if ((a, b) == (b, a + b)) {
             fiboCount.append(number)
         }
@@ -187,6 +192,8 @@ func commonElements(array1: [Int], array2: [Int]) {
     var arr2Set = Set(array2)
     
     var result = arr1Set.union(arr2Set)
+
+    let res3 = arr1Set.intersection(arr2Set)
     print(result.sorted())
     //array1.append(contentsOf: array2)
 }

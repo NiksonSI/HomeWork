@@ -98,17 +98,18 @@ print(arrayB)
 
 // Задача №4 Поиск числа в массиве
 
-var arrayC = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+//var arrayC = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 func numberCheck(C: Int)  {
     var arrayC = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    guard arrayC.contains(C) else
-    {return print("Число не найдено")}
+    guard arrayC.contains(C) else {
+        print("Число не найдено")
+        return
+    }
     
     for (index, value) in arrayC.enumerated() {
         if value == C {
             print("Индекс элемента \(C) в массиве: \(index)")
-            break
         }
     }
 }
@@ -121,7 +122,33 @@ numberCheck(C: 1)
 
 // Задача №5 Максимальная серия чиссел в массиве
 
-var array = [1, 2, 3, 4, 4, 4, 5, 6, 6, 7, 7, 7, 7, 7, 8, 9, 9, 10]
-
-var maxCount = [Int]()
-
+//Максимальная серия
+//Дан массив чисел. Найдите самую длинную серию подряд идущих одинаковых чисел.
+//Например, в массиве [1, 2, 2, 3, 3, 3, 2, 2] самая длинная серия — [3, 3, 3].
+print("Задание 4.5")
+var rangeArr = [3,3,3,3,4,6,1,1,1,7,8,9,1,9,9,9]
+var maxRange = Int()
+var superMaxRange = Int()
+var rangeNumber = Int()
+for (index,number) in rangeArr.enumerated() {
+    if index != rangeArr.endIndex - 1{
+        if rangeArr[index] == rangeArr[index + 1] {
+            maxRange += 1
+        } else if rangeArr[index] != rangeArr[index + 1] {
+            if maxRange >= superMaxRange{
+                superMaxRange = maxRange + 1
+                rangeNumber = number
+                maxRange = 0
+            } else {
+                maxRange = 0
+            }
+        }
+    } else {
+        if rangeArr[index] == rangeArr[index - 1] && maxRange >= superMaxRange{
+            superMaxRange = maxRange + 1
+            rangeNumber = number
+            maxRange = 0
+        }
+    }
+}
+print("Самая большая серия - число \(rangeNumber), кол-во \(superMaxRange)")
