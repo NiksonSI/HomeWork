@@ -424,8 +424,117 @@ print(copy.title)
 print("Задача №3.5")
 
 struct Point {
-    var x: Double
-    var y: Double
-            
+    var x: Int
+    var y: Int
+    
+    func isEqual(to other: Point) -> Bool {
+        return x == other.x && y == other.y
+    }
 }
-// Пока не придумал решение
+let point1 = Point(x: 1, y: 2)
+let point2 = Point(x: 1, y: 2)
+
+print(point1.isEqual(to: point2))
+
+//Дополнительные задачи
+//Задча №1 Хранение массива объектов
+
+///Создайте класс Student с свойствами name и grade.
+//
+///Создайте класс Classroom, который хранит массив студентов и содержит методы:
+//
+///addStudent(_:): добавляет студента в класс.
+//
+///removeStudent(_:): удаляет студента из класса.
+//
+///getAverageGrade(): возвращает средний балл всех студентов.
+print("Доп. Задача №1")
+class Student {
+    var name: String
+    var grade: Int
+    
+    init(name: String, grade: Int) {
+        self.name = name
+        self.grade = grade
+    }
+}
+
+class Classroom {
+    private var students: [Student] = []
+    
+    func addStudent(_ student: Student) {
+        students.append(student)
+    }
+    
+    func removeStudent(_ name: String) {
+        for (position, student) in students.enumerated() {
+            if student.name == name {
+                students.remove(at: position)
+            }
+        }
+    }
+    
+    
+    func getAverageGrade() -> Double {
+            var sumOfGrades = 0
+            for student in students {
+                sumOfGrades += student.grade
+            }
+            return Double(sumOfGrades) / Double(students.count)
+        }
+}
+
+let student1 = Student(name: "Никита", grade: 3)
+let student2 = Student(name: "Рома", grade: 5)
+let student3 = Student(name: "Артем", grade: 2)
+let student4 = Student(name: "Юля", grade: 4)
+let student5 = Student(name: "Алина", grade: 4)
+
+var classA = Classroom()
+classA.addStudent(student1)
+classA.addStudent(student2)
+classA.addStudent(student3)
+classA.addStudent(student4)
+classA.addStudent(student5)
+
+print("Средняя оценка класса: \(classA.getAverageGrade())")
+classA.removeStudent("Никита")
+print("Студент \(student1.name) был отчислен")
+print("Средняя оценка класса: \(classA.getAverageGrade())")
+
+//Задча №2 Константные свойства
+
+///Создайте класс Circle с свойством radius и константным свойством pi = 3.14159 .
+
+///Добавьте вычисляемое свойство area, которое вычисляет площадь круга.
+print("Задача №2")
+class Circle {
+    var radius: Double
+    static let pi = 3.14159
+    
+    init(radius: Double) {
+        self.radius = radius
+    }
+    
+    func area() -> Double {
+        return Circle.pi * pow(radius, 2)
+    }
+}
+
+let circle1 = Circle(radius: 3)
+print("Площадь круга с радиусом \(circle1.radius) = \(circle1.area())")
+
+//Задача №3 Расширения
+///Создайте расширение для класса String, которое добавляет метод isPalindrome(), проверяющий, является ли строка палиндромом.
+print("Задача №3")
+
+extension String {
+    func isPalindrome() -> Bool {
+        
+        let str = self.lowercased()
+        return str == String(str.reversed())
+    }
+}
+
+print("тот".isPalindrome())
+print("Студент".isPalindrome())

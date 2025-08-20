@@ -410,3 +410,212 @@ print("Статус заказа: \(canCancleOrder.canCancle())")
 
 //
  
+//Дополнительные задачи
+//Задача №1 Телефонные номера
+
+///Создайте перечисление PhoneNumberType, которое содержит типы телефонных номеров (мобильный, домашний, рабочий).
+///Добавьте ассоциированные значения для номера телефона.
+///Напишите функцию, которая форматирует номер в зависимости от типа.
+
+print("Задача №1")
+
+enum PhoneNumberType {
+    case mobile(String)
+    case home(String)
+    case work(String)
+}
+
+func formatPhoneNumber(type: PhoneNumberType) -> String {
+    switch type {
+    case .mobile(let number):
+        return "Мобильный: \(number)"
+    case .home(let number):
+        return "Домашний: \(number)"
+    case .work(let number):
+        return "Рабочий: \(number)"
+    }
+}
+let myMobile = PhoneNumberType.mobile("+7 923 176-55-50")
+let myHome = PhoneNumberType.home("383 123-45-67")
+let myWork = PhoneNumberType.work("8800 555-35-35")
+
+// 4. Форматируем и выводим номера
+print(formatPhoneNumber(type: myMobile))
+print(formatPhoneNumber(type: myHome))
+print(formatPhoneNumber(type: myWork))
+//Задача №2 Режимы работы приложения
+
+///Создайте перечисление AppMode, которое содержит режимы работы приложения (светлая тема, темная тема, режим экономии энергии).
+
+///Добавьте метод apply(), который имитирует применение режима.
+print("Задача №2")
+
+enum AppMode {
+    case Light
+    case Dark
+    case BatterySave
+
+    func apply() -> String {
+        switch self {
+        case .Light:
+            return "Светлая тема"
+        case .Dark:
+            return "Темная тема"
+        case .BatterySave:
+            return "Режим экономии энергии"
+        }
+    }
+}
+
+let app1 = AppMode.BatterySave
+let app2 = AppMode.Dark
+print(app1.apply())
+print(app2.apply())
+
+//Задача №3 Карты
+
+///Создайте перечисление CardSuit, которое содержит масти карт (пики, червы, бубны, трефы).
+///Создайте перечисление CardRank, которое содержит ранги карт (2–10, валет, дама, король, туз).
+///Создайте структуру Card, которая объединяет масть и ранг.
+///Напишите функцию, которая генерирует полную колоду карт.
+print("Задача №3")
+
+enum CardSuit: String, CaseIterable {
+    case spades = "Пики"
+    case hearts = "Черви"
+    case diamonds = "Буби"
+    case clubs = "Крести"
+}
+
+enum CardRank: CaseIterable {
+    case two, three, four, five, six, seven, eight, nine, ten
+    case jack, queen, king, ace
+    
+    var description: String {
+        switch self {
+        case .two:
+            return "2"
+        case .three: 
+            return "3"
+        case .four: 
+            return "4"
+        case .five: 
+            return "5"
+        case .six: 
+            return "6"
+        case .seven: 
+            return "7"
+        case .eight: 
+            return "8"
+        case .nine: 
+            return "9"
+        case .ten: 
+            return "10"
+        case .jack: 
+            return "J"
+        case .queen:
+            return "Q"
+        case .king: 
+            return "K"
+        case .ace: 
+            return "A"
+        }
+    }
+}
+
+struct Card {
+    let suit: CardSuit
+    let rank: CardRank
+    
+    var description: String {
+        return "\(rank.description)  \(suit.rawValue)"
+    }
+}
+
+func generateDeck() -> [Card] {
+    var deck: [Card] = []
+    for suit in CardSuit.allCases {
+        for rank in CardRank.allCases {
+            deck.append(Card(suit: suit, rank: rank))
+        }
+    }
+    return deck
+}
+
+let deck = generateDeck()
+print("Полная колода карт (\(deck.count) карты): ")
+for card in deck {
+    print(card.description, terminator: " ")
+}
+
+//Задача №4 Команды управления роботом
+
+///Создайте перечисление RobotCommand, которое содержит команды управления роботом (вперед, назад, влево, вправо) с ассоциированными значениями для расстояния или угла поворота.
+///Напишите функцию, которая интерпретирует команды и перемещает робота.
+
+print("\nЗадача №4")
+
+enum RobotCommand {
+    case forward(distance: Int)
+    case backward(distance: Int)
+    case turnLeft(angle: Int)
+    case turnRight(angle: Int)
+}
+
+func robotCommand(_ command: RobotCommand) -> String {
+    switch command {
+    case .forward(distance: let meters):
+        return "Робот проехал \(meters) метров вперед"
+    case .backward(distance: let meters):
+        return "Робот проехал \(meters) метров назад"
+    case .turnLeft(angle: let degrees):
+        return "Робот повернулся на \(degrees) градусов влево"
+    case .turnRight(angle: let degrees):
+        return "Робот повернулся на \(degrees) градусов вправо"
+    }
+}
+
+var robotPath: [RobotCommand] = []
+
+robotPath.append(RobotCommand.forward(distance: 45))
+robotPath.append(RobotCommand.turnLeft(angle: 90))
+robotPath.append(RobotCommand.forward(distance: 33))
+
+print(robotCommand(robotPath[0]))
+print(robotCommand(robotPath[1]))
+print(robotCommand(robotPath[2]))
+
+//Задача №5 Типы событий
+
+///Создайте перечисление EventType, которое содержит типы событий (конференция, семинар, встреча).
+///Добавьте ассоциированные значения для даты, времени и места события.
+///Напишите функцию, которая форматирует информацию о событии.
+print("Задача №5")
+
+enum EventType {
+    case meeting(date: Date, time: String, location: String)
+    case conference(date: Date, time: String, location: String, speakers: [String])
+    case seminar(date: Date, time: String, location: String, topic: String)
+}
+
+func processEvent(_ event: EventType) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    
+    switch event {
+    case let .conference(date, time, location, speakers):
+        return "Конференция: \(dateFormatter.string(from: date)) - \(time) - \(location)\nСпикеры: \(speakers.joined(separator: ", "))"
+    case let .seminar(date, time, location, topic):
+        return "Семинар: \(dateFormatter.string(from: date)) - \(time) - \(location)\nТема: \(topic)"
+    case let .meeting(date, time, location):
+        return "Встреча: \(dateFormatter.string(from: date)) - \(time) - \(location)"
+    }
+}
+
+let calendar = Calendar.current
+let components = DateComponents(year: 2025, month: 07, day: 13)
+let date = calendar.date(from: components)!
+
+let meeting = EventType.meeting(date: date, time: "9:00", location: "Google Meet")
+print(processEvent(meeting))
